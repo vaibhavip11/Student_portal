@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      /* display: flex; */
+      /* justify-content: center; */
+      /* align-items: center; */
+      /* height: 100vh; */
+    }
+
+    .container {
+      /* background: #fff; */
+      /* padding: 30px; */
+      /* border-radius: 10px; */
+      /* box-shadow: 0 4px 10px rgba(0,0,0,0.1); */
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      /* margin-bottom: 20px; */
+    }
+
+    input {
+      width: 100%;
+      /* margin: 10px 0; */
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    }
+
+    button {
+      /* width: 100%; */
+      margin-top: 15px;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    button:hover:enabled {
+      background: #0056b3;
+    }
+
+    #msg {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Student Registration Form</h2>
+
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="number" id="age" placeholder="Age">
+    <input type="text" id="course" placeholder="Course">
+    <button id="registerBtn" disabled>Register</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    let name=document.getElementById("name");
+    let email=document.getElementById("email");
+    let age=document.getElementById("age");
+    let course=document.getElementById("course");
+
+    let registerBtn=document.getElementById("registerBtn");
+    let msg=document.getElementById("msg");
+
+    function validate(){
+        let valid=true;
+        if(name.value==""){
+            name.style.border="2px solid red";
+            valid=false;
+        } else {
+            name.style.border="2px solid green";
+        }
+
+        if(!email.value.includes("@") || !email.value.includes(".")){
+            email.style.border="2px solid red";
+            valid=false;
+        } else {
+            email.style.border="2px solid green";
+        }
+
+        if(age.value=="" || age.value<18){
+            age.style.border="2px solid red";
+            valid=false;
+        } else {
+            age.style.border="2px solid green";
+        }
+
+        if(course.value==""){
+            course.style.border="2px solid red";
+            valid=false;
+        } else {
+            course.style.border="2px solid green";
+        }
+
+        registerBtn.disabled=!valid;
+    }
+
+    name.addEventListener("input",validate);
+    email.addEventListener("input",validate);
+    age.addEventListener("input",validate);
+    course.addEventListener("input",validate);
+
+    registerBtn.addEventListener("click",function(){
+        name.value="";
+        email.value="";
+        age.value="";
+        course.value="";
+        registerBtn.disabled=true;
+
+        setTimeout(function(){
+            msg.innerHTML="Student Registered Successfully!";
+        },1000);
+    });
+  </script>
+
+</body>
+</html>
